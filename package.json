@@ -1,0 +1,16 @@
+{
+  "name": "fasthtml-js",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Javascript for FastHTML apps",
+  "main": "fasthtml.js",
+  "scripts": { "test": "jasmine" },
+  "keywords": ["fasthtml"],
+  "author": "Jeremy Howard",
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine": "^5.1.0",
+    "jasmine-spec-reporter": "^7.0.0",
+    "jsdom": "^24.1.0"
+  }
+}
