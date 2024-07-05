@@ -9,9 +9,8 @@ export function $E(t='div', {dataset, ...props}={}, c=[]) {
 
 export function proc_htmx(sel, func) {
   htmx.onLoad(elt => {
-    const elements = htmx.findAll(elt, sel);
+    const elements = Array.from(htmx.findAll(elt, sel));
     if (elt.matches(sel)) elements.unshift(elt)
     elements.forEach(func);
   });
 }
-
