@@ -1,6 +1,6 @@
-export function $ (sel) {return document.querySelector   (sel)}
-export function $$(sel) {return document.querySelectorAll(sel)}
-export function $E(t='div', {style, dataset, className, cls, ...attrs}={}, c=[]) {
+function $ (sel) {return document.querySelector   (sel)}
+function $$(sel) {return document.querySelectorAll(sel)}
+function $E(t='div', {style, dataset, className, cls, ...attrs}={}, c=[]) {
   const e = document.createElement(t);
   if (style && typeof style === 'object') Object.assign(e.style, style);
   if (className || cls) e.className = className || cls;
@@ -13,13 +13,13 @@ export function $E(t='div', {style, dataset, className, cls, ...attrs}={}, c=[])
   return e;
 }
 
-export function $H(ss, ...values) {
+function $H(ss, ...values) {
   const r = $E();
   r.innerHTML = ss.reduce((r,s,i) => r+s + (values[i] || ''), '').trim();
   return r.firstElementChild;
 }
 
-export function proc_htmx(sel, func) {
+function proc_htmx(sel, func) {
   htmx.onLoad(elt => {
     const elements = Array.from(htmx.findAll(elt, sel));
     if (elt.matches(sel)) elements.unshift(elt)
@@ -27,7 +27,13 @@ export function proc_htmx(sel, func) {
   });
 }
 
-if (typeof window !== 'undefined') {
+if (typeof exports !== 'undefined') {
+  exports.$ = $;
+  exports.$$ = $$;
+  exports.$E = $E;
+  exports.$H = $H;
+  exports.proc_htmx = proc_htmx;
+} else {
   window.$ = $;
   window.$$ = $$;
   window.$E = $E;
