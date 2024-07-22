@@ -33,10 +33,4 @@ if (typeof exports !== 'undefined') {
   exports.$E = $E;
   exports.$H = $H;
   exports.proc_htmx = proc_htmx;
-} else {
-  window.$ = $;
-  window.$$ = $$;
-  window.$E = $E;
-  window.$H = $H;
-  window.proc_htmx = proc_htmx;
 }
