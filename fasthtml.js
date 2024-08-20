@@ -1,5 +1,10 @@
-function $ (sel) {return document.querySelector   (sel)}
-function $$(sel) {return document.querySelectorAll(sel)}
+function $ (sel, root = document) {return root.querySelector(sel)}
+function $$(sel, root = document) {return root.querySelectorAll(sel)}
+function $H(ss, ...values) {
+  const r = document.createElement('div');
+  r.innerHTML = ss.reduce((r,s,i) => r+s + (values[i] || ''), '').trim();
+  return r.firstElementChild;
+}
 function $E(t='div', {style, dataset, className, cls, ...attrs}={}, c=[]) {
   const e = document.createElement(t);
   if (style && typeof style === 'object') Object.assign(e.style, style);
@@ -11,12 +16,6 @@ function $E(t='div', {style, dataset, className, cls, ...attrs}={}, c=[]) {
   });
   e.append(...(Array.isArray(c) ? c : [c]));
   return e;
-}
-
-function $H(ss, ...values) {
-  const r = $E();
-  r.innerHTML = ss.reduce((r,s,i) => r+s + (values[i] || ''), '').trim();
-  return r.firstElementChild;
 }
 
 function proc_htmx(sel, func) {
