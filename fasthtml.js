@@ -5,17 +5,30 @@ function $H(ss, ...values) {
   r.innerHTML = ss.reduce((r,s,i) => r+s + (values[i] || ''), '').trim();
   return r.firstElementChild;
 }
-function $E(t='div', {style, dataset, className, cls, ...attrs}={}, c=[]) {
-  const e = document.createElement(t);
-  if (style && typeof style === 'object') Object.assign(e.style, style);
-  if (className || cls) e.className = className || cls;
-  if (dataset) Object.assign(e.dataset, dataset);
-  Object.entries(attrs).forEach(([k, v]) => {
-    if (k.startsWith('on') && typeof v === 'function') e.addEventListener(k.slice(2), v);
-    else e.setAttribute(k, v);
-  });
-  e.append(...(Array.isArray(c) ? c : [c]));
-  return e;
+
+function $E(t, attrs = {}, children = []) {
+  if (typeof t === 'string') {
+    const { style, dataset, className, cls, ...rest } = attrs;
+    const e = document.createElement(t);
+    
+    if (style && typeof style === 'object') Object.assign(e.style, style);
+    if (className || cls) e.className = className || cls;
+    if (dataset) Object.assign(e.dataset, dataset);
+    
+    Object.entries(rest).forEach(([k, v]) => {
+      if (k.startsWith('on') && typeof v === 'function') e.addEventListener(k.slice(2), v);
+      else e.setAttribute(k, v);
+    });
+
+    const processChild = (child) => {
+      if (Array.isArray(child)) return $E(...child);
+      else if (typeof child === 'string' || child instanceof Node) return child;
+      return '';
+    };
+
+    e.append(...(Array.isArray(children) ? children.map(processChild) : [processChild(children)]));
+    return e;
+  } else return t;
 }
 
 function proc_htmx(sel, func) {
