@@ -44,9 +44,6 @@ function domReadyExecute(cb) {
   else cb();
 }
 
-console.log(exports);
-console.log('hi');
-
 if (typeof exports !== 'undefined') {
   console.log('exports');
   exports.$ = _$;
