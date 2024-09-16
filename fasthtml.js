@@ -1,12 +1,12 @@
-export function $ (sel, root = document) {return root.querySelector(sel)}
-export function $$(sel, root = document) {return root.querySelectorAll(sel)}
-export function $H(ss, ...values) {
+function _$ (sel, root = document) {return root.querySelector(sel)}
+function _$$(sel, root = document) {return root.querySelectorAll(sel)}
+function $H(ss, ...values) {
   const r = document.createElement('div');
   r.innerHTML = ss.reduce((r,s,i) => r+s + (values[i] || ''), '').trim();
   return r.firstElementChild;
 }
 
-export function $E(t, attrs = {}, children = []) {
+function $E(t, attrs = {}, children = []) {
   if (typeof t === 'string') {
     const { style, dataset, className, cls, ...rest } = attrs;
     const e = document.createElement(t);
@@ -31,7 +31,7 @@ export function $E(t, attrs = {}, children = []) {
   } else return t;
 }
 
-export function proc_htmx(sel, func) {
+function proc_htmx(sel, func) {
   htmx.onLoad(elt => {
     const elements = Array.from(htmx.findAll(elt, sel));
     if (elt.matches(sel)) elements.unshift(elt)
@@ -39,14 +39,20 @@ export function proc_htmx(sel, func) {
   });
 }
 
-export function domReadyExecute(cb) {
+function domReadyExecute(cb) {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", cb)
   else cb();
 }
 
-if (typeof window !== 'undefined') {
-  window.$E = $E;
-  window.$H = $H;
-  window.proc_htmx = proc_htmx;
-  window.domReadyExecute = domReadyExecute;
+console.log(exports);
+console.log('hi');
+
+if (typeof exports !== 'undefined') {
+  console.log('exports');
+  exports.$ = _$;
+  exports.$$ = _$$;
+  exports.$E = $E;
+  exports.$H = $H;
+  exports.proc_htmx = proc_htmx;
+  exports.domReadyExecute = domReadyExecute;
 }
