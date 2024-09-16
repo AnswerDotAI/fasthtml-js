@@ -45,7 +45,6 @@ function domReadyExecute(cb) {
 }
 
 if (typeof exports !== 'undefined') {
-  console.log('exports');
   exports.$ = _$;
   exports.$$ = _$$;
   exports.$E = $E;
