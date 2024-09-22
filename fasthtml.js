@@ -43,16 +43,3 @@ function domReadyExecute(cb) {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", cb)
   else cb();
 }
-
-if (typeof exports !== 'undefined') {
-  exports.$ = _$;
-  exports.$$ = _$$;
-  exports.$E = $E;
-  exports.$H = $H;
-  exports.proc_htmx = proc_htmx;
-  exports.domReadyExecute = domReadyExecute;
-}
-
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { $: _$, $$: _$$, $E, $H, proc_htmx, domReadyExecute };
-}
