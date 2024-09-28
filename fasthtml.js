@@ -43,3 +43,10 @@ function domReadyExecute(cb) {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", cb)
   else cb();
 }
+
+async function hx_multipart(path, context = {}, verb = 'POST') {
+    const form = $H`<form style="display:none;" hx-encoding="multipart/form-data"></form>`;
+    document.body.appendChild(form);
+    try { await htmx.ajax(verb, path, { ...context, source: form }) }
+    finally { form.remove() }
+}
