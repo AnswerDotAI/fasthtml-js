@@ -1,6 +1,6 @@
 {
   "name": "fasthtml-js",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "type": "module",
   "description": "Javascript for FastHTML apps",
   "main": "fasthtml.js",
