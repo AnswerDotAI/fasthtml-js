@@ -1,11 +1,15 @@
 {
   "name": "fasthtml-js",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "type": "module",
   "description": "Javascript for FastHTML apps",
   "main": "fasthtml.js",
-  "scripts": { "test": "jasmine" },
-  "keywords": ["fasthtml"],
+  "scripts": {
+    "test": "jasmine"
+  },
+  "keywords": [
+    "fasthtml"
+  ],
   "author": "Jeremy Howard",
   "license": "ISC",
   "devDependencies": {
