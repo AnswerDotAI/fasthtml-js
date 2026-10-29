@@ -33,7 +33,7 @@ function $E(t, attrs = {}, children = []) {
 
 function proc_htmx(sel, func) {
   htmx.onLoad(elt => {
-    const elements = Array.from(htmx.findAll(elt, sel));
+    const elements = Array.from(elt.querySelectorAll(sel));
     if (elt.matches(sel)) elements.unshift(elt)
     elements.forEach(func);
   });
